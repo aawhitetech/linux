@@ -1,0 +1,49 @@
+@FILESYSTEM
+
+- A file system is a logical collection of files on a partition or disk. A partition is a container for information and can span an entire hard drive if desired.
+- Your hard drive can have various partitions which usually contains only one file system, such as one file system housing the / file system or another containing the /home file system.
+- One file system per partition allows for the logical maintenance and management of differing file systems.
+- Everything in Linux is considered to be a file, including physical devices such as DVD-ROMs, USB devices, floppy drives, and so forth.
+- Directory Structure:
+    Linux uses a hierarchical file system structure, much like an upside-down tree, with root (/) at the base of the file system and all other directories spreading from there.
+- A LINUX filesystem is a collection of files and directories that has the following properties:
+- It has a root directory (/) that contains other files and directories.
+- Each file or directory is uniquely identified by its name, the directory in which it resides, and a unique identifier, typically called an inode.
+- By convention, the root directory has an inode number of 2 and the lost+found directory has an inode number of 3. Inode numbers 0 and 1 are not used. File inode numbers can be seen by specifying the -i option to ls command.
+- It is self contained. There are no dependencies between one filesystem and any other.
+
+Filesystem Types
+- ext3 (Linux)
+- ext4 (Linux)
+- xfs (Linux)
+- NTFS (Windows)
+- FAT (Windows)
+
+Structure
+
+- /bin -> /usr/bin   - User Binaries - Everyday user commands
+- /boot              - Boot Loader files - Contains file that is used by the boot loader (grub.cfg)
+- /dev               - Device Filse - System Devices (e.g. disk, cdrom, speakers, flashdrive, etc.)
+- /etc               - Configuration files
+- /home              - Home Directories - Directory for user
+- /lib -> /usr/lib   - System Libraries - C programming library files needed by commands and apps
+- /media             - Removable Devices - For cdrom mounts
+- /mnt               - Mount Direcory - To mount external filesystem (e.g. NFS)
+- /opt               - Optional Add-on Apps - Optional add-on applications (Not part of OS apps)
+- /proc              - Process information - Running processes (Only exist in Memory)
+- /root              - Root user home directory. It is not same as /
+- /run               - System daemons that start very early (e.g. systemd and udev) to store temporary runtime files like PID files
+- /sbin -> /usr/sbin - System Binaries - System/filesystem commands
+- /srv               - Service Data
+- /tmp               - Temporary files - Directory for temporary files
+- /var               - Variable files - Contains files that change - log files, spool dirs, formatted manual pages, temporary files
+- /usr               - User Programs - contains commands, libraries, manual pages, and other unchanging files needed for normal operation (Not machine specific)
+
+File Types
+- '-' - Regular File
+- d - Directory
+- l - Link
+- c - Special file or device file
+- s - socket
+- p - name pipe
+- b - block device
