@@ -1,0 +1,47 @@
+@NFS @STORAGE @FILESYSTEM @FILESHARE
+
+Network File System
+- Client/server system that allows users to access files across a network and treat them as if they resided in a local file directory
+
+# Server Config
+# install NFS packages
+rpm -qa | grep nfs
+yum install nfs-utils libnfsidmap
+
+# Enable services
+systemctl enable rpcbind
+systenctl enable nfs-server
+
+# Start services
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start rpc-statd
+systemctl start nfs-idmapd
+
+# Create NFS share directory + permissions
+mkdir /mypretzels
+chmod a+rws /mypretzels
+
+# Modify /etc/exports file to add new shared filesystem
+/mypretzels <clientIp> (rw, sync, no_root_squash)
+/mylinuxshare * (rw, sync, no_root_squash)
+
+# Export NFS Filesystem
+exportfs -rv
+-----------------------
+
+# Client Config
+yum install nfs-utils rpcbind
+systemctl start rpcbind
+
+# Add firewall rules
+
+# Show mount on NFS server
+showmount -e <serverIp>
+
+# Mount
+mkdir /mnt/nfs_share
+mount <serverIp>:/<servershare> /mnt/nfs_share
+
+# Unmount
+umount /mnt/nfs_share

@@ -1,0 +1,23 @@
+
+List of commands for setting up ACL :
+# To add permission for a user
+setfacl -m "u:user:permissions" /path/to/file
+# To add permissions for a group
+setfacl -m "g:group:permissions" /path/to/file
+# To allow all files or directories to inherit ACL entries from the directory it is within
+setfacl -dm "entry" /path/to/dir
+# To remove a specific entry
+setfacl -x "entry" /path/to/file
+# To remove all entries
+setfacl -b path/to/file
+
+Modifying ACL using setfacl :
+To add permissions for a user (user is either the user name or ID):
+# setfacl -m "u:user:permissions"
+To add permissions for a group (group is either the group name or ID):
+# setfacl -m "g:group:permissions"
+To allow all files or directories to inherit ACL entries from the directory it is within:
+# setfacl -dm "entry"
+Example :
+setfacl -m u:iafzal:r-x test/seinfeld.txt
+setfacl and getfacl

@@ -1,0 +1,27 @@
+@USER @USERS @GROUP @GROUPS @WHO @FINGER @PINKY
+
+useradd
+useradd -m -d /home/johndoe -s /bin/bash -c "John Doe, Developer" -G developers,sudo -g users -u 2020 -e 2025-01-01 johndoe
+
+usermod
+userdel
+
+groupadd
+groupdel
+
+# User Files
+/etc/passwd = This file has all user’s attributes
+/etc/shadow = This file contains encrypted user password and password policy
+/etc/group = All group and user group information
+
+# Monitor user commands
+who
+last
+w
+id
+whoami
+who am i
+
+
+finger
+pinky

@@ -1,0 +1,33 @@
+@SWAP @MEMORY
+
+M = RAM in GB, S = SWAP in GB
+
+IF M < 2
+THEN S = M * 2
+ELSE S = M + 2
+
+# View Memory
+free -m
+
+# View Swap
+swapon -s
+
+# Create Swap
+dd if=/dev/zero of=/swapfile bs=1M count=1024
+OR
+fallocate -l 1G /swapfile
+
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+# Remove Swap
+swapoff -v /swapfile
+rm /swapfile
+
+# Add Swap
+swapon /swapfile
+
+# Add swap on boot
+vi /etc/fstab
+/swapfile swap swap defaults 0 0

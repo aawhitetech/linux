@@ -1,0 +1,27 @@
+@MOUNT @PARTITION @FILESYSTEM @UNMOUNT @STORAGE @DISK
+
+lsblk
+
+df -h
+df -i
+df -T
+
+fdisk -l
+
+# Create a new partition
+fdisk /dev/sdb
+n, p, 1, 2048, +1G, w
+
+# Create a new file system
+mkfs.xfs /dev/sdb1
+
+# Mount a file system
+mkdir /data
+mount /dev/sdb1 /data
+
+# Unmount a file system
+umount /data
+
+# Mount a file system automatically
+/etc/fstab
+/dev/sdb1 /data xfs defaults 0 0

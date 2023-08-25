@@ -1,0 +1,7 @@
+@BACKUP @SYSTEM @DISK 
+
+1. System Backup (entire image using tools such as acronis, Veeam, Commvault etc.)
+2. Application Backup (3rd party application backup solution)
+3. Database backup (Oracle dataguard, SQL backup etc.)
+4. Filsystem backup (tar, gzip directories)
+5. Disk backup or disk cloning (dd command)

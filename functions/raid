@@ -1,0 +1,5 @@
+RAID (Redundant Array of Independent Disks)
+
+- RAID0 - d1 + d2 Multiple physical disks together
+- RAID1 - d1 = d2 Mirrored disks (Slow replicating)
+- RAID5 - d1 += d2 += d3

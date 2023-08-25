@@ -1,0 +1,122 @@
+### 1. **Check the `firewalld` Service Status**:
+
+Before troubleshooting, ensure `firewalld` is running:
+```bash
+sudo systemctl status firewalld
+```
+
+If it's not running, start it with:
+```bash
+sudo systemctl start firewalld
+```
+
+### 2. **List Active Zones and Interfaces**:
+
+This will display the active zones and associated interfaces:
+```bash
+sudo firewall-cmd --get-active-zones
+```
+
+### 3. **List All Rules in the Active Zone**:
+
+This is useful to see the rules that are applied in the current active zone:
+```bash
+sudo firewall-cmd --list-all
+```
+
+### 4. **List Rules in a Specific Zone**:
+
+To see rules in a particular zone, use:
+```bash
+sudo firewall-cmd --zone=public --list-all
+```
+Replace `public` with the desired zone name.
+
+### 5. **Querying a Service or Port**:
+
+Check if a specific service is allowed:
+```bash
+sudo firewall-cmd --zone=public --query-service=http
+```
+
+Check if a specific port is allowed:
+```bash
+sudo firewall-cmd --zone=public --query-port=8080/tcp
+```
+
+### 6. **Logs and Messages**:
+
+If `firewalld` is not behaving as expected, checking logs can provide clues:
+```bash
+sudo journalctl -u firewalld
+```
+
+### 7. **Check Default and Active Zones**:
+
+The default zone is where interfaces will be placed if no zone is specified:
+```bash
+sudo firewall-cmd --get-default-zone
+```
+
+To see the active zone:
+```bash
+sudo firewall-cmd --get-active-zone
+```
+
+### 8. **Reload `firewalld` Without Dropping Connections**:
+
+If you made temporary (`--permanent` not used) changes and want to revert them:
+```bash
+sudo firewall-cmd --reload
+```
+
+### 9. **List All Available Services**:
+
+This shows all predefined services in `firewalld`:
+```bash
+sudo firewall-cmd --get-services
+```
+
+### 10. **Adding and Removing Services/Ports**:
+
+Add a service (temporarily):
+```bash
+sudo firewall-cmd --add-service=http
+```
+
+Add a service permanently (survives reboots):
+```bash
+sudo firewall-cmd --permanent --add-service=http
+```
+
+Similarly, for ports:
+```bash
+sudo firewall-cmd --add-port=8080/tcp
+sudo firewall-cmd --permanent --add-port=8080/tcp
+```
+
+### 11. **Direct Rules**:
+
+For more complex rules or if you need to do something not covered by standard commands, you can use direct rules. Here's how to list them:
+```bash
+sudo firewall-cmd --direct --get-all-rules
+```
+
+### 12. **Check Panic Mode**:
+
+In panic mode, all incoming and outgoing packets are dropped, and active connections will be terminated:
+```bash
+sudo firewall-cmd --query-panic
+```
+
+### 13. **Interfaces and Zones**:
+
+To move an interface to a different zone:
+```bash
+sudo firewall-cmd --zone=public --change-interface=eth0
+```
+Replace `eth0` with your interface and `public` with your desired zone.
+
+Remember, the `--permanent` option makes the changes permanent but requires a reload (`firewall-cmd --reload`) to apply the changes to the running configuration. If `--permanent` isn't specified, the change is made to the running configuration and will be lost on the next reload or reboot.
+
+When troubleshooting, always keep in mind the order of your rules, as the first match wins. If a deny or drop rule matches before an allow rule, the allow rule will never take effect.

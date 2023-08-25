@@ -1,0 +1,16 @@
+
+# Compress
+tar -czvf archive-name.tar.gz directory-name/
+
+gzip filename.txt
+
+# Decompress
+tar -xzvf archive-name.tar.gz
+gzip -d filename.txt.gz
+
+
+# Add file
+tar -rvf archive-name.tar new-file.txt
+
+# Viewing
+tar -tf archive-name.tar.gz

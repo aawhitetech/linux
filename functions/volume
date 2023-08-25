@@ -1,0 +1,46 @@
+@VOLUME @LVM @MOUNT @PARTITION @FILESYSTEM @UNMOUNT @STORAGE
+
+lsblk
+
+df -h
+df -i
+df -T
+
+fdisk -l
+
+# Create a new partition
+fdisk /dev/sdb
+n, p, 2, 2048, +1G
+t, [L - 8e Linux LVM], 8e
+w
+
+# Create physical volume
+pvcreate /dev/sdb2
+pvdisplay
+
+# Create volume group
+vgcreate vg_data /dev/sdb2
+vgdisplay
+
+# Create logical volume
+lvcreate -n lv_data -L 1G vg_data
+lvdisplay
+
+# Create a new file system
+mkfs.xfs /dev/vg_data/lv_data
+
+# Mount a file system
+mkdir /lv_data
+mount /dev/vg_data/lv_data /lv_data
+
+# Unmount a file system
+umount /lv_data
+
+# Mount a file system automatically
+/etc/fstab
+/dev/vg_data/lv_data /lv_data xfs defaults 0 0
+
+# Extend volume group
+vgextend vg_data /dev/sdc1
+lvextend -L +1G /dev/mapper/vg_data-lv_data
+xfs_growfs /dev/mapper/vg_data-lv_data

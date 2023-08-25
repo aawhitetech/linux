@@ -1,0 +1,104 @@
+### 1. **Physical Connection Check**:
+- Ensure all cables (Ethernet, etc.) are properly connected.
+- Check that devices (routers, modems, switches) are powered on and indicating normal status through LED lights.
+
+### 2. **Interface Check**:
+- List all network interfaces with:
+  ```bash
+  ip a
+  ```
+- Ensure your interface is UP. If not, you can bring it up using:
+  ```bash
+  sudo ip link set [interface-name] up
+  ```
+
+### 3. **IP Configuration Check**:
+- Confirm that your interface has an IP address. If not, you might need to configure it manually or ensure a DHCP server is reachable.
+- If you need to set a static IP:
+  ```bash
+  sudo ip addr add [IP-Address]/[CIDR] dev [interface-name]
+  ```
+
+### 4. **Ping Test**:
+- Test local network stack:
+  ```bash
+  ping 127.0.0.1
+  ```
+- Test local network:
+  ```bash
+  ping [local-router-IP]
+  ```
+
+- Test an external IP to see if you can reach the outside world:
+  ```bash
+  ping 8.8.8.8
+  ```
+
+- Test domain name resolution:
+  ```bash
+  ping google.com
+  ```
+
+### 5. **DNS Configuration Check**:
+- Check `/etc/resolv.conf` for DNS servers:
+  ```bash
+  cat /etc/resolv.conf
+  ```
+- If necessary, manually set a DNS server. Google's public DNS is `8.8.8.8` and `8.8.4.4`, and Cloudflare's is `1.1.1.1`.
+
+### 6. **Routing Check**:
+- Check your routing table with:
+  ```bash
+  ip route
+  ```
+- Ensure there's a default route configured. If not, add one:
+  ```bash
+  sudo ip route add default via [router-IP]
+  ```
+
+### 7. **Network Service Check**:
+- If using NetworkManager or `systemd-networkd`, ensure the service is running:
+  ```bash
+  systemctl status NetworkManager
+  # OR
+  systemctl status systemd-networkd
+  ```
+
+### 8. **Firewall/Security Rules**:
+- Check if a firewall is blocking your connections:
+  ```bash
+  sudo iptables -L -v
+  ```
+- For systems using `firewalld`:
+  ```bash
+  sudo firewall-cmd --list-all
+  ```
+
+### 9. **Network Tools**:
+- **`netstat`**: View network connections, routing tables, interface statistics, etc.
+- **`ss`**: Another utility to investigate sockets.
+- **`traceroute`** (or `mtr`): Show the route packets take to reach a network host.
+- **`nmap`**: Scan open ports on a machine.
+- **`nslookup`** and **`dig`**: Query DNS lookup name.
+
+### 10. **Check for External Issues**:
+Sometimes the problem isn't on your end. It could be an issue with your ISP, a downed service you're trying to reach, or routing issues beyond your local network.
+
+### 11. **Check Logs**:
+- System logs can provide information about network-related issues. On systems with `systemd`, you can use:
+  ```bash
+  journalctl -xe
+  ```
+- Check logs for NetworkManager, if in use:
+  ```bash
+  journalctl -u NetworkManager
+  ```
+
+### 12. **Restart Services/Reboot**:
+Sometimes simply restarting networking services or the whole system can help:
+```bash
+sudo systemctl restart NetworkManager
+# OR
+sudo systemctl restart systemd-networkd
+```
+If all else fails, a system reboot might be helpful.

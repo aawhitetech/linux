@@ -1,0 +1,92 @@
+### 1. **Install OpenSSH Server**:
+If you don't have the OpenSSH server installed:
+
+On **Debian/Ubuntu** systems:
+```bash
+sudo apt update
+sudo apt install openssh-server
+```
+
+On **Red Hat/CentOS** systems:
+```bash
+sudo yum install openssh-server
+```
+
+### 2. **SSH Key Configuration**:
+
+#### Generate SSH keys (if you haven't):
+On the client machine:
+```bash
+ssh-keygen
+```
+This will generate a private key (`~/.ssh/id_rsa`) and a public key (`~/.ssh/id_rsa.pub`).
+
+#### Transfer public key to the server:
+You can use `ssh-copy-id` for this. Replace `username` with your actual username and `server_ip` with your server's IP:
+```bash
+ssh-copy-id username@server_ip
+```
+
+### 3. **SSH Configuration**:
+
+#### Edit the SSH configuration file:
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+(Replace `nano` with your preferred text editor if needed.)
+
+#### Change SSH port:
+Find the line that says `Port 22` and change `22` to your desired port number, e.g., `Port 2222`.
+
+#### Disable password authentication:
+Find the line `#PasswordAuthentication yes` and modify it to:
+```
+PasswordAuthentication no
+```
+
+#### Set connection timeout:
+To specify the timeout value (in seconds), find the line `#ClientAliveInterval 0` and modify it to, for example, `ClientAliveInterval 120` for a 2-minute timeout. If the client doesn't send any data within this interval, the server will send a request back to the client to check if it's still available.
+
+Also, find the `#ClientAliveCountMax 3` line and uncomment or modify it. This directive specifies how many client alive messages can be sent without `sshd` receiving any messages back from the client. If this threshold is reached, `sshd` will disconnect the client, terminating the session.
+
+#### Other common configurations:
+
+- **Limit Users**: If you want to limit which users can access via SSH:
+  ```
+  AllowUsers username1 username2
+  ```
+
+- **Limit Root Login**: It's usually a good practice to disallow root from logging in directly:
+  ```
+  PermitRootLogin no
+  ```
+
+- **Protocol Version**: Ensure only SSH protocol version 2 is used (it's more secure than version 1):
+  ```
+  Protocol 2
+  ```
+
+- **Banner**: You can configure SSH to display a pre-login banner, which might be used for legal notices or general information. First, specify the banner file:
+  ```
+  Banner /etc/issue.net
+  ```
+  Then edit the file (`sudo nano /etc/issue.net`) to add your desired message.
+
+After making the necessary changes, **save and exit** the file.
+
+### 4. **Restart SSH Service**:
+For changes to take effect, restart the SSH service:
+
+For **Debian/Ubuntu** systems:
+```bash
+sudo systemctl restart sshd
+```
+
+For **Red Hat/CentOS** systems:
+```bash
+sudo systemctl restart sshd.service
+```
+
+Now your SSH server should be using keys for authentication, running on the specified port, and have the desired timeout setting.
+
+**Note**: Always make sure you have a backup way into your system when changing SSH configurations (e.g., console access through a hosting provider), especially when altering ports or disabling authentication methods, to avoid being locked out.

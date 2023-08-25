@@ -1,0 +1,63 @@
+@SYSTEM @SYSINFO
+
+# Linux System Information
+uname –a
+
+
+cat /etc/redhat-release
+
+
+# Linux System Hardware Information
+lshw 
+lshw -short
+lshw -html > lshw.html
+
+dmidecode
+dmidecode -t system
+
+
+# Linux System CPU Information
+cat /proc/cpuinfo
+lscpu
+lscpu -e
+
+# Linux System Memory Information
+cat /proc/meminfo
+free -m
+vmstat -s
+
+# Linux System Disk Information
+df -h
+fdisk -l
+lsblk
+lsblk -f
+lsblk -m
+du -sh
+
+
+# Linux System Network Information
+ifconfig
+ifconfig -a
+ifconfig -s
+ifconfig -s -a
+ifconfig -s -a | awk '{print $1}'
+ifconfig -s -a | awk '{print $1}' | grep -v Iface
+ifconfig -s -a | awk '{print $1}' | grep -v Iface | grep -v lo
+
+ip addr show
+ip addr show | grep inet
+
+ip link show
+ip link show | grep -v lo
+
+
+# Linux System Process Information
+ps -ef
+ps aux
+
+# Linux System Package Information
+rpm -qa
+yum list installed
+
+
+

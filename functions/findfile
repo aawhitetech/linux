@@ -1,0 +1,8 @@
+@FIND @LOCATE @SEARCHFILE @FILE @FILESYSTEM
+
+# Find a file
+find / -name data.txt
+
+# Locate a file
+updatedb
+locate data.txt
