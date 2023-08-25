@@ -1,0 +1,111 @@
+#!/bin/bash
+
+number=5
+
+if [ $number -gt 10 ]; then
+    echo "The number is greater than 10."
+elif [ $number -lt 10 ]; then
+    echo "The number is less than 10."
+else
+    echo "The number is equal to 10."
+fi
+
+### 1. **Basic Numeric Comparisons**:
+- `-eq`: equal to
+- `-ne`: not equal to
+- `-gt`: greater than
+- `-lt`: less than
+- `-ge`: greater than or equal to
+- `-le`: less than or equal to
+
+```bash
+if [ $num1 -eq $num2 ]; then
+    echo "Both numbers are equal."
+fi
+```
+
+### 2. **String Comparisons**:
+- `=` or `==`: check if two strings are equal
+- `!=`: check if two strings are not equal
+- `-z`: check if string is empty
+- `-n`: check if string is not empty
+
+```bash
+name="Alice"
+
+if [ "$name" == "Alice" ]; then
+    echo "Name is Alice."
+fi
+
+if [ -z "$emptyString" ]; then
+    echo "The string is empty."
+fi
+```
+
+### 3. **File Tests**:
+- `-e`: check if file exists
+- `-f`: check if it's a regular file (not a directory or device file)
+- `-d`: check if it's a directory
+- `-r`: check if file is readable
+- `-w`: check if file is writable
+- `-x`: check if file is executable
+- `-s`: check if file size is non-zero (not empty)
+
+```bash
+file="/etc/passwd"
+
+if [ -e "$file" ]; then
+    echo "File exists."
+fi
+
+if [ -d "$file" ]; then
+    echo "It's a directory."
+elif [ -f "$file" ]; then
+    echo "It's a regular file."
+fi
+```
+
+### 4. **Combining Conditions**:
+- `!`: NOT
+- `-a`: AND
+- `-o`: OR
+
+```bash
+num=5
+
+if [ $num -gt 10 -o $num -lt 20 ]; then
+    echo "Number is outside the range 10-20."
+fi
+```
+
+**Note**: It's more common and recommended to use double square brackets `[[ ... ]]` for complex conditions because of its improved string handling and support for logical operators (`&&` for AND and `||` for OR):
+
+```bash
+if [[ $num > 10 && $num < 20 ]]; then
+    echo "Number is within the range 10-20."
+fi
+```
+
+### 5. **Using Exit Status**:
+Commands in Bash return an exit status, where `0` usually means success and non-zero means error. You can leverage this with `if`:
+
+```bash
+if grep -q "Alice" /etc/passwd; then
+    echo "Alice exists as a user."
+fi
+```
+
+Here, the `-q` option tells `grep` to run quietly without outputting matching lines, and the `if` command checks the exit status of `grep`.
+
+### 6. **Arithmetic Evaluation**:
+Use double parentheses `(( ... ))` for arithmetic operations:
+
+```bash
+if (( num > 10 && num < 20 )); then
+    echo "Number is within the range 10-20."
+fi
+```
+
+Remember, when comparing strings or file paths, always surround the variables with double quotes to safely handle spaces or special characters in them. 
+
+These are some essential variations of the `if` command in Bash. There are many other nuances and capabilities, especially when you delve into advanced scripting.

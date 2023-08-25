@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PS3="Choose a fruit: "
+
+select fruit in Apple Banana Orange Exit
+do
+    case $fruit in
+        Apple)
+            echo "You chose apple."
+            ;;
+        Banana)
+            echo "You chose banana."
+            ;;
+        Orange)
+            echo "You chose orange."
+            ;;
+        Exit)
+            echo "Bye!"
+            break
+            ;;
+        *)
+            echo "Invalid choice."
+            ;;
+    esac
+done

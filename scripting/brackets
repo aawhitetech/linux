@@ -1,0 +1,41 @@
+### **Brackets**:
+1. **Square Brackets `[ ]`**:
+    - Often used for test conditions.
+    - Example: `if [ "$a" -eq "$b" ]; then ...`.
+    - Note: Always ensure spaces around the brackets: `[ "$a" -eq "$b" ]` is correct, while `["$a" -eq "$b"]` isn't.
+
+2. **Double Square Brackets `[[ ]]`**:
+    - A more modern method for string comparison and pattern matching. It's more powerful and flexible than single square brackets and is a Bash-specific feature.
+    - Example: `if [[ $string =~ ^[0-9]+$ ]]; then ...` checks if `$string` contains only digits.
+
+### **Curly Braces**:
+1. **Curly Braces in Variable Expansion `${var}`**:
+    - Useful for expanding variables when they're adjacent to strings and you need to differentiate between the variable name and the adjacent text.
+    - Example: If `file="doc"`, then `echo "${file}ument"` will print `document`.
+
+2. **Curly Braces in Sequence Expansion**:
+    - Generate sequences.
+    - Example: `echo {1..5}` will print `1 2 3 4 5`.
+
+3. **Curly Braces for Patterns**:
+    - Used for expanding input patterns.
+    - Example: `mv file.{txt,backup}` would try to rename `file.txt` to `file.backup`.
+
+4. **Curly Braces in Functions**:
+    - Define the body of a function.
+    - Example:
+        ```bash
+        function greet {
+            echo "Hello, $1"
+        }
+        ```
+
+5. **Curly Braces in Block of Commands**:
+    - Group commands to run in the current shell context.
+    - Example:
+        ```bash
+        {
+            echo "Starting task..."
+            echo "Task completed."
+        } > output.log
+        ```

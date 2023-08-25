@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for i in {1..5}
+do
+   echo "Iteration number $i"
+done
+
+
+#!/bin/bash
+
+for file in $(ls)
+do
+   echo "File: $file"
+done

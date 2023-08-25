@@ -1,0 +1,9 @@
+### **Quotes**:
+1. **Single Quotes `' '`**:
+    - Everything enclosed between single quotes remains literal. No variable substitution or command substitution will occur within single quotes.
+    - Example: `echo '$USER'` will print `$USER` and not the value of the `USER` variable.
+
+2. **Double Quotes `" "`**:
+    - Enclosing strings in double quotes (`" "`) will allow for variable and command substitution.
+    - Example: `echo "$USER"` will print the value of the `USER` variable.
+    - Command substitution with `$(...)` also works within double quotes: `echo "Today's date is: $(date)"`.
