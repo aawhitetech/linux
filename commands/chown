@@ -1,0 +1,8 @@
+@FILE @FILEOWNERSHIP @OWNERSHIP @USER @GROUP @CHOWN
+
+chown [options] user[:group] file
+-R recursively descend through the directory structure
+-f force, and don’t report any errors
+
+chown [options] :new_group object(s)
+chown [options] .new_group object(s)

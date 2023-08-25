@@ -1,0 +1,106 @@
+@SED @EDIT @REPLACE @TEXT
+
+sed [options] edit_command [file]
+
+The format for the editing commands are:
+
+[address1[,address2]][function][arguments]
+
+
+s/regular_expression_pattern/replacement_string/flag
+
+1. **Replace first occurrence of a pattern in each line**:
+   ```bash
+   echo "Hello world. Hello universe." | sed 's/Hello/Hi/'
+   ```
+   Output: `Hi world. Hello universe.`
+
+2. **Replace all occurrences of a pattern in each line**:
+   ```bash
+   echo "Hello world. Hello universe." | sed 's/Hello/Hi/g'
+   ```
+   Output: `Hi world. Hi universe.`
+
+3. **Replace occurrence of a pattern only on a specific line**:
+   ```bash
+   echo -e "Hello\nHello world.\nHello universe." | sed '2s/Hello/Hi/'
+   ```
+   Output:
+   ```
+   Hello
+   Hi world.
+   Hello universe.
+   ```
+
+4. **Delete lines matching a pattern**:
+   ```bash
+   echo -e "apple\nbanana\ncherry\napple pie" | sed '/apple/d'
+   ```
+   Output:
+   ```
+   banana
+   cherry
+   ```
+
+5. **Delete lines not matching a pattern**:
+   ```bash
+   echo -e "apple\nbanana\ncherry\napple pie" | sed '/apple/!d'
+   ```
+   Output:
+   ```
+   apple
+   apple pie
+   ```
+
+6. **Change a pattern only if it's on a line that matches another pattern**:
+   ```bash
+   echo -e "fruit: apple\nfruit: banana\ndessert: apple pie" | sed '/dessert/s/apple/peach/'
+   ```
+   Output:
+   ```
+   fruit: apple
+   fruit: banana
+   dessert: peach pie
+   ```
+
+7. **Insert a line before a pattern**:
+   ```bash
+   echo -e "apple\ncherry" | sed '/cherry/i banana'
+   ```
+   Output:
+   ```
+   apple
+   banana
+   cherry
+   ```
+
+8. **Insert a line after a pattern**:
+   ```bash
+   echo -e "apple\ncherry" | sed '/apple/a banana'
+   ```
+   Output:
+   ```
+   apple
+   banana
+   cherry
+   ```
+
+9. **Replace end of line (append to line)**:
+   ```bash
+   echo "Hello" | sed 's/$/, world!/'
+   ```
+   Output: `Hello, world!`
+
+10. **Replace beginning of line (prepend to line)**:
+    ```bash
+    echo "world!" | sed 's/^/Hello, /'
+    ```
+    Output: `Hello, world!`
+
+Remember, `sed` can also operate on files. For instance, if you have a file named `data.txt`, you can use `sed` as follows:
+```bash
+sed -i 's/old/new/g' data.txt
+```
+This command replaces all occurrences of "old" with "new" in `data.txt`. The `-i` flag indicates in-place editing, so the original file will be modified.
+
+The power of `sed` lies in its ability to chain and combine these commands and in the use of regular expressions for advanced text manipulation tasks. Always remember to back up your data before using `sed` on important files, especially with in-place editing.

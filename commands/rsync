@@ -1,0 +1,58 @@
+@RSYNC @COPY @FILES
+https://www.tecmint.com/rsync-local-remote-file-synchronization-commands/
+
+FLAGS
+-v – Verbose output, displaying detailed information about the transfer.
+-r – copies data recursively (but doesn’t preserve timestamps and permission while transferring data.
+-a – archive mode, which allows copying files recursively and it also preserves symbolic links, file permissions, user & group ownerships, and timestamps.
+-z – Compress files during transfer to reduce network usage.
+-h – human-readable, output numbers in a human-readable format.
+-P – Show progress during the transfer.
+SOURCE – Specifies the source file(s) or directory to be transferred, which can be a local or a remote location.
+DESTINATION – Specifies the destination path where the files or directories will be copied. Similar to the source, it can be a local path or a remote location.
+
+
+- Copy/Sync File Locally
+rsync -zvh backup.tar.gz /tmp/backups/
+
+- Copy/Sync Directory Locally
+rsync -avzh /root/rpmpkgs /tmp/backups/
+
+- Copy a Directory from Local to Remote Server
+rsync -avzh /root/rpmpkgs root@192.168.0.141:/root/
+
+- Copy a Directory from Remote to Local Server
+rsync -avzh root@192.168.0.141:/root/rpmpkgs /tmp/myrpms
+
+- Rsync Over SSH
+rsync [OPTIONS] -e ssh /path/to/source user@remote:/path/to/destination
+
+- Copy a File from a Remote Server to a Local Server with SSH
+rsync -avzhe ssh root@192.168.0.141:/root/anaconda-ks.cfg /tmp
+
+- Copy a File from a Local Server to a Remote Server with SSH
+rsync -avzhe ssh backup.tar.gz root@192.168.0.141:/backups/
+
+- Show Progress While Transferring Data with Rsync
+rsync --progress <>
+
+- Include Files with Particular Extension with Rsync
+rsync -avz --include='*.txt' /path/to/source/ user@remote:/path/to/destination/
+
+- Exclude Files with Particular Extension with Rsync
+rsync -avz --exclude='*.ext' /path/to/source/ user@remote:/path/to/destination/
+
+- Use of –delete Option with Rsync
+rsync -avz --delete root@192.168.0.151:/var/lib/rpm/ /root/rpm/
+
+- Set File Transfer Limit with Rsync
+rsync -avzhe ssh --max-size='200k' /var/lib/rpm/ root@192.168.0.151:/root/tmprpm
+
+- Automatically Delete Source Files After Transfer
+rsync --remove-source-files -zvh backup.tar.gz root@192.168.0.151:/tmp/backups/
+
+- Do a Dry Run with Rsync
+rsync --dry-run --remove-source-files -zvh backup.tar.gz root@192.168.0.151:/tmp/backups/
+
+- Rsync Set Bandwidth Limit and Transfer File
+rsync --bwlimit=100 -avzhe ssh  /var/lib/rpm/  root@192.168.0.151:/root/tmprpm/

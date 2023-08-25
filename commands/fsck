@@ -1,0 +1,20 @@
+@FSCK @FILESYSTEMCHECK
+
+- unmount filesystems OR boot into single user
+
+df -T
+
+fsck
+fsck -f (Force filesystem check even if it's clean)
+fsck -y (Attempt to fix detected problems automatically)
+
+0- no errors
+1- Filesystem errors corrected
+2- System should be rebooted
+4- Filesystem errors left uncorrected
+8- Operational error
+16- Usage or syntax error
+32- Fsck canceled by user request
+128- Shared-library error
+
+echo $?

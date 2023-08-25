@@ -1,0 +1,17 @@
+@dd @BACKUP @DISK
+
+- converts and copies files
+- backup boot sector
+- fixed amount of random data
+
+# Backup or Clone an entire HD to another HD connected on the same system
+dd if=<source> of=<target> [Options]
+
+dd if=/dev/sda of=/dev/sdb
+
+# Backup or copy disk partition
+dd if=/dev/sda1 of=/root/sda1.img
+
+# Restoring this image file to other machine after copying the .img
+dd if=/root/sda1.img of=/dev/sdb3
+

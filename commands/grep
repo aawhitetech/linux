@@ -1,0 +1,26 @@
+@GREP @FILTER @TEXT
+
+grep [options] regexp [file[s]]
+
+Common Options
+    -i ignore case
+    -c report only a count of the number of lines containing matches, not the matches themselves
+    -v invert the search, displaying only lines that do not match
+    -n display the line number along with the line on which a match was found
+    -s work silently, reporting only the final status:
+        0, for match(es) found
+        1, for no matches
+        2, for errors
+    -l list filenames, but not lines, in which matches were found
+
+Examples:
+
+grep '15' num.list - search for 15
+grep -c '15' num.list - search for count of 15
+grep '1[125]' num.list - search for 11, 12, 15
+grep '^ ' num.list - search for lines that start with a space
+grep '^[^ ]' num.list - search for lines that do not start with a space
+grep -v '^ ' num.list - search for lines that do not start with a space
+grep '^[1-9]' num.list - search for lines that start with a digit
+grep 'te*' num.list - search for te, tee, teee, teeee, etc.
+grep 'tee*' num.list - search for tee, tee, teee, teeee, etc.

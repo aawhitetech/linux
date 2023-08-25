@@ -1,0 +1,10 @@
+@XFS_REPAIR @FILESYSTEMCHECK
+
+- does not run at boot time
+- unmount first
+
+df -T
+
+xfs_repair /dev/sdb1
+echo $?
+

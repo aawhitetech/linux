@@ -1,0 +1,5 @@
+@LOCATE @SEARCHFILE @FILE @FILESYSTEM
+
+locate sysctl.conf
+locate -e sysctl.conf
+

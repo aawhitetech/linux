@@ -1,0 +1,10 @@
+@MOTD @MessageOfTheDay
+
+/etc/motd
+
+- customize
+create a new file in /etc/profile.d/motd.sh
+add commands
+/etc/ssh/sshd_config
+#PrintMotd yes to PrintMotd no
+systemctl restart sshd

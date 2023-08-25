@@ -1,0 +1,11 @@
+@DELETE @FILES @FILESYSTEM 
+
+
+Deletes/removes files or directories if file permissions permit
+
+Example:
+
+rm sample.f - deletes sample.f
+rm chap?.txt - deletes all files with chap as the first four characters of their name and with .txt as the last four characters of their name
+rm -i * - deletes all files in current directory but asks first for each file
+rm -r /olddir - recursively removes all files in the directory olddir, including the directory itself

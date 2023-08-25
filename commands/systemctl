@@ -1,0 +1,19 @@
+
+systemctl status <service>
+systemctl start <service>
+systemctl stop <service>
+systemctl restart <service>
+systemctl reload <service>
+systemctl enable <service>
+systemctl disable <service>
+systemctl is-enabled <service>
+systemctl is-active <service>
+systemctl is-failed <service>
+systemctl show <service>
+systemctl mask <service>
+systemctl unmask <service>
+systemctl list-dependencies <service>
+
+
+#
+systemctl list-unit-files --type service

@@ -1,0 +1,7 @@
+@LINKS @HARDLINKS @SOFTLINKS
+
+# Create hard link
+ln /etc/file1 /tmp/file_link
+
+# Create soft link
+ln -s /etc/file1 /tmp/file_link

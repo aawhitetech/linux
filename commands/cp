@@ -1,0 +1,11 @@
+@COPY @CP @FILE
+
+Copies files. Will overwrite unless otherwise specified. Must also have write permission in the destination directory.
+
+Example:
+cp sample.f sample2.f - copies sample.f to sample2.f
+cp -R dir1 dir2 - copies contents of directory dir1 to dir2
+cp -i file.1 file.new - prompts if file.new will be overwritten
+cp *.txt chapt1 - copies all files with .txt suffix to directory chapt1
+cp /usr/doc/README ~ - copies file to your home directory
+cp ~betty/index . - copies the file "index" from user betty's home directory to current directory

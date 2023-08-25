@@ -1,0 +1,21 @@
+@TEE
+
+tee sends standard in to specified files and also to standard out. It’s often used in command pipelines.
+
+tee [options] [file[s]]
+
+Common Options
+-a append the output to the files
+-i ignore interrupts
+
+# Examples
+who | tee users.file
+
+condron ttyp0 Apr 22 14:10 (lcondron-pc.acs.)
+frank ttyp1 Apr 22 16:19 (nyssa)
+condron ttyp9 Apr 22 15:52 (lcondron-mac.acs)
+
+who | tee users.a users.b | wc -l
+3
+
+ls -l | tee files.long |grep Aug

@@ -1,0 +1,103 @@
+@AWK
+
+Absolutely! `awk` is a versatile programming language primarily used for pattern scanning and text/data extraction. Below are some basic to more advanced examples of `awk` commands:
+
+1. **Print a specific field/column**:
+   ```bash
+   echo "one two three" | awk '{print $2}'
+   ```
+   Output: `two`
+
+   If using a file with space-separated values:
+   ```bash
+   awk '{print $2}' filename
+   ```
+
+2. **Print multiple fields**:
+   ```bash
+   echo "one two three" | awk '{print $1, $3}'
+   ```
+   Output: `one three`
+
+3. **Sum the values of a column**:
+   Suppose you have a file named `numbers.txt` containing:
+   ```
+   10
+   20
+   30
+   40
+   ```
+   To sum the values:
+   ```bash
+   awk '{sum+=$1} END {print sum}' numbers.txt
+   ```
+   Output: `100`
+
+4. **Filter lines based on condition**:
+   If you want to print lines where the first column is greater than 20:
+   ```bash
+   echo -e "10\n20\n30\n40" | awk '$1 > 20'
+   ```
+   Output:
+   ```
+   30
+   40
+   ```
+
+5. **Using Field Separators**:
+   By default, `awk` uses spaces as the field separator. You can specify other separators using the `-F` option.
+   ```bash
+   echo "one,two,three" | awk -F, '{print $2}'
+   ```
+   Output: `two`
+
+6. **Print lines with specific string**:
+   ```bash
+   echo -e "apple\nbanana\ncherry\napple pie" | awk '/apple/'
+   ```
+   Output:
+   ```
+   apple
+   apple pie
+   ```
+
+7. **Modify Field Values**:
+   To double the values in the first column:
+   ```bash
+   echo -e "1\n2\n3" | awk '{$1 = $1 * 2; print $1}'
+   ```
+   Output:
+   ```
+   2
+   4
+   6
+   ```
+
+8. **Count lines containing a specific pattern**:
+   ```bash
+   echo -e "apple\nbanana\napple pie" | awk '/apple/ {count++} END {print count}'
+   ```
+   Output: `2`
+
+9. **Record and field variables**:
+   Use `NF` for number of fields and `NR` for current record number.
+   ```bash
+   echo -e "one\ntwo three\nfour five six" | awk '{print NR " - " $NF}'
+   ```
+   Output:
+   ```
+   1 - one
+   2 - three
+   3 - six
+   ```
+
+10. **Using built-in variables**:
+    - `FILENAME`: Name of the current input file.
+    - `FNR`: Record number in the current file.
+    - `OFS`: Output field separator (default is a space).
+    - `ORS`: Output record separator (default is a newline).
+
+   Print filename and line number for each line:
+   ```bash
+   awk '{print FILENAME, FNR, $0}' filename
+   ```

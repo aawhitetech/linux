@@ -1,0 +1,10 @@
+@FILE @FILEOWNERSHIP @OWNERSHIP @GROUP @CHGRP
+
+chown [options] user[:group] file
+-R recursively descend through the directory structure
+-f force, and don’t report any errors
+
+
+chgrp [options] group file
+-R recursively descend through the directory structure
+-f force, and don’t report any errors

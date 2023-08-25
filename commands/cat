@@ -1,0 +1,5 @@
+@PRINT @READ @CAT @MULTILINE
+
+cat <filename>
+
+cat <<EOF > <filename>

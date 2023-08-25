@@ -1,0 +1,5 @@
+@TEXT @FILES @ECHO @WRITETOFILE @WRITE
+
+# echo command
+echo “Your text goes here” > filename (To add text and create a new file)
+echo “Additional text” >> filename (To append to an existing file)

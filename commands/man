@@ -1,0 +1,6 @@
+@HELP @MAN
+
+man <cmd>
+
+# keyword search
+man -k mail

@@ -1,0 +1,13 @@
+@LS @FiLESYSTEM @FILES
+
+ls - list directory contents
+
+# Options Used In This Document
+    -r, --reverse               reverse order while sorting
+    -l                          use a long listing format
+    -t                          sort by modification time, newest first
+    -i, --inode                 print the index number of each file
+    -a, --all                   do not ignore entries starting with .
+    -d, --directory             list directories themselves, not their contents
+    -p, --indicator-style=slash append / indicator to directories
+    --group-directories-first   group directories before files
